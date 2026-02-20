@@ -67,7 +67,7 @@ function draw() {
 
   // --- draw ---
   cam.begin();
-  level.drawWorld();
+  level.drawWorld(player);
   player.draw(level.theme.blob);
   cam.end();
 

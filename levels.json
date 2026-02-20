@@ -4,8 +4,8 @@
     {
       "name": "Intro Steps",
       "theme": {
-        "bg": "#F0F0F0",
-        "platform": "#C8C8C8",
+        "bg": "#add8e6",
+        "platform": "#3cb371",
         "blob": "#1478FF"
       },
       "gravity": 0.65,

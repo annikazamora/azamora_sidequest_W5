@@ -16,6 +16,7 @@ class BlobPlayer {
     this.frictionGround = 0.88;
 
     this.onGround = false;
+    this.isJumping = false;
 
     // wobble visuals
     this.t = 0;
@@ -42,6 +43,7 @@ class BlobPlayer {
     if (this.onGround) {
       this.vy = this.jumpV;
       this.onGround = false;
+      this.isJumping = true;
     }
   }
 
@@ -90,6 +92,8 @@ class BlobPlayer {
         }
       }
     }
+    // If landed, not jumping
+    if (this.onGround) this.isJumping = false;
 
     // write back
     this.x = box.x + box.w / 2;
@@ -116,6 +120,60 @@ class BlobPlayer {
       vertex(this.x + cos(a) * rr, this.y + sin(a) * rr);
     }
     endShape(CLOSE);
+
+    // Draw smiley face
+    // Eyes
+    fill(0);
+    ellipse(
+      this.x - this.r * 0.35,
+      this.y - this.r * 0.25,
+      this.r * 0.18,
+      this.r * 0.18,
+    );
+    ellipse(
+      this.x + this.r * 0.35,
+      this.y - this.r * 0.25,
+      this.r * 0.18,
+      this.r * 0.18,
+    );
+    // Mouth
+    if (this.isJumping) {
+      // Open happy mouth
+      fill(0);
+      arc(
+        this.x,
+        this.y + this.r * 0.18,
+        this.r * 0.6,
+        this.r * 0.5,
+        0,
+        PI,
+        CHORD,
+      );
+      fill(255, 100, 100);
+      arc(
+        this.x,
+        this.y + this.r * 0.22,
+        this.r * 0.3,
+        this.r * 0.18,
+        0,
+        PI,
+        CHORD,
+      );
+    } else {
+      // Normal smile
+      noFill();
+      stroke(0);
+      strokeWeight(2);
+      arc(
+        this.x,
+        this.y + this.r * 0.15,
+        this.r * 0.9,
+        this.r * 0.6,
+        0.15 * PI,
+        0.85 * PI,
+      );
+      noStroke();
+    }
   }
 
   static overlap(a, b) {
